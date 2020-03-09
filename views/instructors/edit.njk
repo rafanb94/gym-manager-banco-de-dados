@@ -1,0 +1,19 @@
+{% extends "template.njk" %}
+
+{% block content %}
+    <div class="card">
+        <section class="avatar" style='background: url({{intructor.avatar_url}}) no-repeat center center / cover'></section>
+        <section class="details">
+            <form method="POST" action="/instructors?_method=PUT">
+                <h3>Editar Instrutor</h3>
+                {% include 'instructors/form.njk' %}
+                <input type="hidden" name="id" value="{{ instructor.id }}">
+            </form>
+            <form method="POST" action="/instructors?_method=DELETE"  id="form-delete">
+                <input type="hidden" name="id" value="{{ instructor.id }}">
+                <button type="submit">Deletar</button>
+            </form>
+        </section>   
+    </div>
+     <script src="../public/scripts.js"></script>
+{% endblock %}

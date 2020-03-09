@@ -1,0 +1,32 @@
+{
+  "name": "controle-de-academia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "start": "npm-run-all -p nomedon browsersync",
+    "nomedon": "nodemon server.js",
+    "browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public, views' --b firefox"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafanb94/controle-de-academia.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafanb94/controle-de-academia/issues"
+  },
+  "homepage": "https://github.com/rafanb94/controle-de-academia#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "nunjucks": "^3.2.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5"
+  }
+}

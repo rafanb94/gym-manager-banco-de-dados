@@ -1,0 +1,45 @@
+{% extends "template.njk" %}
+
+{% block content %}
+    <div class="card">
+        <section class="avatar" style="background: url({{ member.avatar_url }}) no-repeat center center / cover"></section>
+        <section class="details">
+            <h3>Detalhes</h3>
+            <div class="item">
+                <div>Membro</div>
+                <div>{{ member.name }}</div>
+            </div>
+            <div class="item">
+                <div>E-mail</div>
+            <div>{{ member.email }}</div>
+            </div>
+            <div class="item">
+                <div>Idade</div>
+                <div>{{ member.birth }}</div>
+            </div>
+            <div class="item">
+                <div>Sexo</div>
+                <div>{{"Masculino" if member.gender =="M" else "Feminino" }}</div>
+            </div>
+            <div class="item">
+                <div>Tipo Sanguinio</div>
+            <div>{{ member.blood }}</div>
+            </div>
+            <div class="item">
+                <div>
+                    {% for service in member.services %}
+                        <span>{{ service }}</span>
+                    {% endfor %}
+                </div>
+            <div class="item">
+                <div>Peso</div>
+                <div>{{ member.weidth}}</div>
+            </div>
+            <div class="item">
+                <div>Altura</div>
+                <div>{{ member.heigth}}</div>
+            </div>
+            <a class="button" href="/members/{{ member.id }}/edit">Editar</a>
+        </section>
+    </div>
+    {% endblock%}
