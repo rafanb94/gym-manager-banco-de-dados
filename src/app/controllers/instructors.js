@@ -35,11 +35,9 @@ module.exports = {
     ]
 
     db.query(query, values, function(err, results){
-      if (err) return  response.send("DataBase Error")
-      return response.redirect(`/instructors/${results.rows[0]}.id`)
+      if (err) return  response.send(404)
+      return response.redirect(`/instructors/${results.rows[0].id}`)
     })
-
-  
   },
   show (request, response){
   return
