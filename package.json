@@ -1,28 +1,29 @@
 {
-  "name": "controle-de-academia",
+  "name": "gym-manager-banco-de-dados",
   "version": "1.0.0",
   "description": "",
   "main": "script.js",
   "scripts": {
     "start": "npm-run-all -p nomedon browsersync",
-    "nomedon": "nodemon server.js",
-    "browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public, views' --b firefox"
+    "nomedon": "nodemon src/server.js",
+    "browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public, src/app/views' --b firefox"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rafanb94/controle-de-academia.git"
+    "url": "git+https://github.com/rafanb94/gym-manager-banco-de-dados.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rafanb94/controle-de-academia/issues"
+    "url": "https://github.com/rafanb94/gym-manager-banco-de-dados/issues"
   },
-  "homepage": "https://github.com/rafanb94/controle-de-academia#readme",
+  "homepage": "https://github.com/rafanb94/gym-manager-banco-de-dados#readme",
   "dependencies": {
     "express": "^4.17.1",
     "method-override": "^3.0.0",
-    "nunjucks": "^3.2.0"
+    "nunjucks": "^3.2.0",
+    "pg": "^7.18.2"
   },
   "devDependencies": {
     "browser-sync": "^2.26.7",
