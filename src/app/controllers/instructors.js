@@ -1,9 +1,12 @@
-const { date } = require ("../../lib/utils")
-const  db = require ("../config/db")
+const Instructor = require ("../models/Instructor")
 
 module.exports = {
   index (request, response){
-    return response.render("instructors/index")
+
+    Instructor.all(function(instructors) {
+      return response.render("instructors/index", { instructors })
+    })
+
   },
   create (request, response){
     return response.render("instructors/create")
@@ -16,27 +19,10 @@ module.exports = {
       if (request.body[key] == "") {
         return response.send("Preencha todos os campos");
       }
-    }    
-    const query = `INSERT INTO instructors (
-      name,
-      avatar_url,
-      gender,
-      services,
-      birth,
-      created_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`
-
-    const values = [
-      request.body.name,
-      request.body.avatar_url,
-      request.body.gender,
-      request.body.services,
-      date(request.body.birth).iso,
-      date(Date.now()).iso
-    ]
-
-    db.query(query, values, function(err, results){
-      if (err) return  response.send(404)
-      return response.redirect(`/instructors/${results.rows[0].id}`)
+    }  
+    
+    Instructor.create(response.body, function (instructor){
+          return response.redirect(`/instructors/${instructor.id}`)
     })
   },
   show (request, response){
