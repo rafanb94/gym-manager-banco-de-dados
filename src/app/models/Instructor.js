@@ -1,11 +1,11 @@
-const { date } = require ("../../lib/utils")
+const { age, date } = require ("../../lib/utils")
 const  db = require ("../config/db")
 
 module.exports = {
 
     all(callback) {
-        db.query('SELECT * FROM instructors', function(err, results){
-            if (err) return  response.send(404)
+        db.query('SELECT * FROM instructors ORDER BY id ASC', function(err, results){
+            if (err) throw `DataBase  Error - Não foi possivel listar ${err}` 
 
             callback(results.rows)
         })
@@ -32,27 +32,54 @@ module.exports = {
           date(Date.now()).iso
     
         ]
-                db.query(query, values, function(err, results){
-          if(err)  throw `Database error! ${err}`
+          db.query(query, values, function(err, results){
+            if (err) throw `DataBase  Error - Não foi possivel Adicionar o ${data.name} ${err}`
     
           callback(results.rows[0])
         })
     
       },
-    
+    find (id, callback){
 
+      db.query(`SELECT * FROM instructors WHERE id = $1`, [id],  function(err, results){
+        if (err) throw `DataBase  Error - Não foi possivel encontrar o ${id} ${err}`
 
+        callback(results.rows[0])
+      })
 
+    },
+    update (data, callback) {
+      const query = `
+      UPDATE instructors SET
+      avatar_url = ($1),
+      name = ($2),
+      birth = ($3),
+      gender = ($4),
+      services = ($5)
+      WHERE id = $6
+      `
+      const values = [
+        data.avatar_url,
+        data.name,
+        date(data.birth).iso,
+        data.gender,
+        data.services,
+        data.id,
+      ]
+      db.query (query, values, function (err, results){
+        if (err) throw `Data Base  Error! ${err}` 
 
+        callback()
 
+      })
+    },
 
+    delete (id, callback) {
+      db.query (`DELETE FROM instructors WHERE id = $1`, [id], function(err,results){
+        if (err) throw `DataBase Error - Erro ao Deletar ${err}`
 
+        return callback()
+      })
 
-
-
-
-
-
-
-
-}
+    }
+ }

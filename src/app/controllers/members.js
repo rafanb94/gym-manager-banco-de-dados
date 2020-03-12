@@ -1,40 +1,62 @@
-const { age, date } = require ("../../lib/utils")
+const { date, age } = require("../../lib/utils");
+const Member = require("../models/Member");
 
 module.exports = {
-  index (request, response){
-    return response.render("members/index")
+  index(request, response) {
+    Member.all(function(members) {
+      return response.render("members/index", { members });
+    });
   },
-  create (request, response){
-    return response.render("members/create")
+  create(request, response) {
+    return response.render("members/create");
   },
-  post (request, response){
+  post(request, response) {
     const keys = Object.keys(request.body);
     //return response .send(keys)
-  
+
     for (key of keys) {
       if (request.body[key] == "") {
         return response.send("Preencha todos os campos");
       }
     }
-    return
+
+    Member.create(request.body, function(member) {
+      return response.redirect(`/members/${member.id}`);
+    });
   },
-  show (request, response){
-  return
+  show(request, response) {
+    Member.find(request.params.id, function(member) {
+      if (!member) return response.send("Instrutor nao encontrado");
+      member.birth = date(member.birth).birthDay;
+
+      return response.render("members/show", { member });
+    });
   },
-  edit (request, response){
-    return
+  edit(request, response) {
+    Member.find(request.params.id, function(member) {
+      if (!member) return response.send("Instrutor nao encontrado");
+      member.birth = date(member.birth).iso
+
+      return response.render("members/edit", { member });
+    });
   },
-  put (request, response){
+  put(request, response) {
     const keys = Object.keys(request.body);
     //return response .send(keys)
-  
+
     for (key of keys) {
       if (request.body[key] == "") {
         return response.send("Preencha todos os campos");
       }
     }
+
+    Member.update(request.body, function() {
+      return response.redirect(`/members/${request.body.id}`);
+    });
   },
-  delete (request, response){
-    return
+  delete(request, response) {
+    Member.delete(request.body.id, function() {
+      return response.redirect(`/members`);
+    });
   }
-}
+};
