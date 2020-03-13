@@ -140,15 +140,14 @@ input::placeholder{
 }
 
 button[type="submit"], a.button{
-    padding: 8px 32px;
+    padding: 9px 32px;
     background-color: var(--primary-color);
     border-radius: 4px;
-    margin-top: 32px;
-    width: 100%;
     color:#fff;
     font-size: 16px;
     font-weight: bold;
     border:none;
+    width: 120px;
 }
 
 a.button {
@@ -216,4 +215,25 @@ a.button {
 .button-novo {
     margin: 5px 16px;
     display: inline-block;
+}
+/*== FILTER ==*/
+.table-container .header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.table-container .header form {
+    display: grid;
+    grid-template-columns: 1fr 120px;
+    align-items: center;
+}
+
+.table-container .header form input {
+    border: 1px solid var(--primary-color);
+    padding: 6px 8px;
+}
+.table-container .header form .button {
+border-radius: 0px;
 }

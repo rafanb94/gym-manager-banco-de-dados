@@ -8,7 +8,9 @@ module.exports = {
     });
   },
   create(request, response) {
-    return response.render("members/create");
+    Member.instructorsMember(function (options) {
+      return response.render("members/create", {instructorOptions: options});
+    })
   },
   post(request, response) {
     const keys = Object.keys(request.body);
@@ -34,10 +36,18 @@ module.exports = {
   },
   edit(request, response) {
     Member.find(request.params.id, function(member) {
-      if (!member) return response.send("Instrutor nao encontrado");
+      if (!member) return response.send("Instrutor nao encontrado")
+
       member.birth = date(member.birth).iso
 
-      return response.render("members/edit", { member });
+      if (!member) return response.send("Instrutor nao encontrado")
+
+      member.birth = date(member.birth).iso
+
+      Member.instructorsMember(function (options) {
+        return response.render("members/edit", { member, instructorOptions: options });
+      })
+
     });
   },
   put(request, response) {
