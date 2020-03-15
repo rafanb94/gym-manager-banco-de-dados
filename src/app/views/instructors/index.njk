@@ -5,7 +5,7 @@
     <div class="header">
         <a class="button" href="/instructors/create">Novo</a>
         <form action="/instructors" method="GET">
-        <input type="text" name="filter" placeholder="Nome ou Serviços" value={{filter}}>
+        <input type="text" name="filter" placeholder="Nome ou Serviços" value={{filter }}>
         <button class="button" type="submit">Filtrar</button>
         </form>
     </div>
@@ -31,5 +31,10 @@
         {% endfor %}
         </tbody>
     </table>
+        <div class="pagination"
+        data-page = {{ pagination.page }}
+        data-total = {{ pagination.total }}
+        data-filter = {{filter}}>
+        </div>
     </div>
     {% endblock%}

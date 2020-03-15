@@ -177,7 +177,7 @@ a.button {
     font-size: 14px;
 }
 .table-container td, th {
-    padding: 16px;
+    padding: 25px;
     border-bottom: 1px solid #d9d9d9;
 }
 .table-container tbody tr:last-child td {
@@ -232,8 +232,39 @@ a.button {
 
 .table-container .header form input {
     border: 1px solid var(--primary-color);
-    padding: 6px 8px;
+    padding: 4px 8px;
 }
 .table-container .header form .button {
 border-radius: 0px;
 }
+
+/* == PAGINATION == */
+
+.table-container {
+    display: grid;
+    grid-template-rows: 64px 1fr 16px;
+    grid-template-columns: 1fr;
+}
+
+.table-container .header {
+    margin:0;
+    align-self: start;
+}
+
+.table-container .pagination {
+    margin:0;
+    align-self: end;
+    justify-self: center;
+}
+
+.pagination a, .pagination span{ 
+    color: var(--primary-color);
+    text-decoration: none;
+    margin-right: 16px;
+}
+
+.pagination a:hover{
+    filter: brightness(0.1);
+    border-bottom: 1px solid var(--primary-color);
+}
+
